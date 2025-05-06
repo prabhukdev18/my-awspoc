@@ -1,10 +1,23 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Authenticator } from '@aws-amplify/ui-react';
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+import App from "./App.tsx";
+import "./index.css";
+import { Amplify } from "aws-amplify";
+
+import outputs from "../amplify_outputs.json";
+import '@aws-amplify/ui-react/styles.css';
+
+Amplify.configure(outputs);
+
+
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+
+  <React.StrictMode>
+    <Authenticator socialProviders={['google']}>
+      <App />
+    </Authenticator>
+  </React.StrictMode>
+);
